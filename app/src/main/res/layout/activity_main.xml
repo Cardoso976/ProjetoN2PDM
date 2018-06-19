@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="QuizPRO - Fatec PDM"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnIncluir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="IncluirPergunta"
+        android:text="Incluir pergunta" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="372dp">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtAcertos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Acertos: 0 (0%)"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_green_light" />
+
+    <TextView
+        android:id="@+id/txtErros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Erros: 0 (0%)"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark" />
+
+</LinearLayout>
