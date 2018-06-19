@@ -17,33 +17,24 @@ public class IncluirPerguntaActivity extends AppCompatActivity {
 
     public void incluir(View view){
         EditText edtPergunta = (EditText)findViewById(R.id.edtPergunta);
-        EditText edtOpA = (EditText)findViewById(R.id.edtOpA);
-        EditText edtOpB = (EditText)findViewById(R.id.edtOpB);
-        EditText edtOpC = (EditText)findViewById(R.id.edtOpC);
-        EditText edtOpD = (EditText)findViewById(R.id.edtOpD);
+        EditText edtAltA = (EditText)findViewById(R.id.edtAltA);
+        EditText edtAltB = (EditText)findViewById(R.id.edtAltB);
+        EditText edtAltC = (EditText)findViewById(R.id.edtAltC);
+        EditText edtAltD = (EditText)findViewById(R.id.edtAltD);
+        EditText edtAltOk = (EditText)findViewById(R.id.edtAltOk);
 
-        RadioButton rbA = (RadioButton)findViewById(R.id.altA);
-        RadioButton rbB = (RadioButton)findViewById(R.id.altB);
-        RadioButton rbC = (RadioButton)findViewById(R.id.altC);
-        RadioButton rbD = (RadioButton)findViewById(R.id.altD);
+        String altA = edtAltA.getText().toString();
+        String altB = edtAltB.getText().toString();
+        String altC = edtAltC.getText().toString();
+        String altD = edtAltD.getText().toString();
+        String altOk = edtAltOk.getText().toString();
 
-        String opA = edtOpA.getText().toString();
-        String opB = edtOpB.getText().toString();
-        String opC = edtOpC.getText().toString();
-        String opD = edtOpD.getText().toString();
-        String opOk ="";
+        if (altOk.equalsIgnoreCase("a")){altOk = altA;}
+        else if (altOk.equalsIgnoreCase("b")){altOk = altB;}
+        else if (altOk.equalsIgnoreCase("c")){altOk = altC;}
+        else if (altOk.equalsIgnoreCase("d")){altOk = altD;}
 
-        if (rbA.isChecked()){
-            opOk += "opA";
-        }else if (rbB.isChecked()){
-            opOk += "opB";
-        }else if (rbC.isChecked()){
-            opOk += "opC";
-        }else if (rbD.isChecked()){
-            opOk += "opD";
-        }
-
-        Pergunta pergunta = new Pergunta(edtPergunta.getText().toString(), opA, opB, opC, opD, opOk);
+        Pergunta pergunta = new Pergunta(edtPergunta.getText().toString(), altA, altB, altC, altD, altOk);
         DAO repository = new DAO(this);
         repository.CreatePergunta(pergunta);
         Toast.makeText(this,"Pergunta incluída com sucesso",Toast.LENGTH_LONG).show();

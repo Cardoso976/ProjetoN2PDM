@@ -2,12 +2,11 @@ package com.example.rodrigo.quizpro;
 
 public class Pergunta {
 
-    private String pergunta;
-    private String altA, altB, altC, altD, altCorreta;
+    private String pergunta, altA, altB, altC, altD, altCorreta;
     private boolean respondido;
 
-    public Pergunta(String questao, String altA, String altB, String altC, String altD, String altCorreta) {
-        this.pergunta = questao;
+    public Pergunta(String pergunta, String altA, String altB, String altC, String altD, String altCorreta) {
+        this.pergunta = pergunta;
         this.altA = altA;
         this.altB = altB;
         this.altC = altC;

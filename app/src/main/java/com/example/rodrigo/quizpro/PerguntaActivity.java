@@ -17,18 +17,18 @@ public class PerguntaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pergunta);
 
         TextView txtPergunta = findViewById(R.id.txtPergunta);
-        RadioButton opA = (RadioButton)findViewById(R.id.altA);
-        RadioButton opB = (RadioButton)findViewById(R.id.altB);
-        RadioButton opC = (RadioButton)findViewById(R.id.altC);
-        RadioButton opD = (RadioButton)findViewById(R.id.altD);
+        RadioButton altA = (RadioButton)findViewById(R.id.altA);
+        RadioButton altB = (RadioButton)findViewById(R.id.altB);
+        RadioButton altC = (RadioButton)findViewById(R.id.altC);
+        RadioButton altD = (RadioButton)findViewById(R.id.altD);
 
         Intent it = getIntent();
 
         txtPergunta.setText(it.getStringExtra("pergunta"));
-        opA.setText(it.getStringExtra("opA"));
-        opB.setText(it.getStringExtra("opB"));
-        opC.setText(it.getStringExtra("opC"));
-        opD.setText(it.getStringExtra("opD"));
+        altA.setText(it.getStringExtra("altA"));
+        altB.setText(it.getStringExtra("altB"));
+        altC.setText(it.getStringExtra("altC"));
+        altD.setText(it.getStringExtra("altD"));
 
     }
     public void responder(View view){
@@ -36,16 +36,16 @@ public class PerguntaActivity extends AppCompatActivity {
         int idRespostaCorreta = 0;
         boolean acertou = false;
 
-        String altA = intent.getStringExtra("opA");
-        String altB = intent.getStringExtra("opB");
-        String altC = intent.getStringExtra("opC");
-        String altD = intent.getStringExtra("opD");
-        String altCorreta = intent.getStringExtra("opCorreta");
+        String A = intent.getStringExtra("altA");
+        String B = intent.getStringExtra("altB");
+        String C = intent.getStringExtra("altC");
+        String D = intent.getStringExtra("altD");
+        String Correta = intent.getStringExtra("altCorreta");
 
-        if (altCorreta.equalsIgnoreCase(altA)){idRespostaCorreta = R.id.altA;}
-        else if (altCorreta.equalsIgnoreCase(altB)){idRespostaCorreta = R.id.altB;}
-        else if (altCorreta.equalsIgnoreCase(altC)){idRespostaCorreta = R.id.altC;}
-        else if (altCorreta.equalsIgnoreCase(altD)){idRespostaCorreta = R.id.altD;}
+        if (Correta.equalsIgnoreCase(A)){idRespostaCorreta = R.id.altA;}
+        else if (Correta.equalsIgnoreCase(B)){idRespostaCorreta = R.id.altB;}
+        else if (Correta.equalsIgnoreCase(C)){idRespostaCorreta = R.id.altC;}
+        else if (Correta.equalsIgnoreCase(D)){idRespostaCorreta = R.id.altD;}
 
         TextView txtPergunta = (TextView) findViewById(R.id.txtPergunta);
         RadioGroup radioGroup = (RadioGroup)findViewById(R.id.radioGroup);

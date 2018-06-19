@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Pergunta> adapter;
     private Toast toasty;
     private long lastBackPressTime = 0;
-    private BancoOpenHelper openHelper;
+    private OpenHelper openHelper;
     private SQLiteDatabase context;
 
     @Override
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         perguntas = new ArrayList<>();
 
         DAO repository = new DAO(this);
-        repository.GetPerguntas();
+        perguntas = repository.GetPerguntas();
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, perguntas);
 
@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
         listView.setChoiceMode(listView.CHOICE_MODE_MULTIPLE);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-                Pergunta perguntaClick = perguntas.get(posicao);
-                if (!perguntaClick.isRespondido()){
+            public void onItemClick(AdapterView<?> parent, View view, int posicao, long id) {
+                Pergunta pergunta = perguntas.get(posicao);
+                if (!pergunta.isRespondido()){
+                    pergunta.setRespondido(true);
                     chamarViewPergunta(posicao);
-                    perguntaClick.setRespondido(true);
                     adapter.notifyDataSetChanged();
                 } else {
                     toasty();
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
             if (requestCode == 0) {
-                boolean repostaCorreta = data.getBooleanExtra("repostaCorreta", false);
+                boolean repostaCorreta = data.getBooleanExtra("acertou", false);
 
                 if (repostaCorreta) {
                     acertos++;
