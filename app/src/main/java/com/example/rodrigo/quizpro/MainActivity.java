@@ -106,6 +106,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void IncluirPergunta(View view){
+        Intent intent = new Intent(this,IncluirPerguntaActivity.class);
+        startActivityForResult(intent,1);
+        //startActivity(intent);
+    }
+
     private void atualizaPlacar(int erros, int acertos){
         TextView txtAcertos = (TextView) findViewById(R.id.txtAcertos);
         TextView txtErros = (TextView) findViewById(R.id.txtErros);
