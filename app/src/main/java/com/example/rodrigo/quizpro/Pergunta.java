@@ -70,6 +70,7 @@ public class Pergunta {
     public boolean isRespondido() {
         return respondido;
     }
+
     public void setRespondido(boolean respondido) {
         this.respondido = respondido;
     }

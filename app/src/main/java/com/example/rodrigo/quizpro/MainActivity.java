@@ -68,14 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void refreshLista(){
-        DAO repository = new DAO(this);
-        perguntas = repository.GetPerguntas();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, perguntas);
-        ListView listView = (ListView)findViewById(R.id.listView);
-        listView.setAdapter(adapter);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         DAO repository = new DAO(this);
@@ -86,11 +78,49 @@ public class MainActivity extends AppCompatActivity {
                 atualizaPlacar(0,0);
                 Toast.makeText(MainActivity.this, "Perguntas Exluidas, placar zerado ", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.totPerguntas:
+                Toast.makeText(MainActivity.this, "Total Perguntas Cadastradas:  " + totalPerguntasCadastradas(), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.totRespondidas:
+                int total = acertos+erros;
+                Toast.makeText(MainActivity.this, "Total Perguntas Respondidas:  " + total, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.percAcertos:
+                Toast.makeText(MainActivity.this, "Total Respostas Corretas:  " + percentualAcertos(), Toast.LENGTH_SHORT).show();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private int percentualAcertos(){
+        DAO repository = new DAO(this);
+        perguntas = repository.GetPerguntas();
+        int count = 0;
+
+        for (Pergunta p : perguntas)
+            if(p.isRespondido()) {
+                count++;
+            }
+
+        return count;
+    }
+
+    private int totalPerguntasCadastradas(){
+        DAO repository = new DAO(this);
+        perguntas = repository.GetPerguntas();
+        return perguntas.size();
+    }
+
+    private void refreshLista(){
+        DAO repository = new DAO(this);
+        perguntas = repository.GetPerguntas();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, perguntas);
+        ListView listView = (ListView)findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

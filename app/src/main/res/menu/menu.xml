@@ -4,7 +4,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/totPerguntas"
+        android:title="Total Perguntas Cadastradas"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/totRespondidas"
+        android:title="Total Perguntas Respondidas"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/percAcertos"
+        android:title="Total Respostas Corretas"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/excluir"
-        android:title="Excluir"
+        android:title="Excluir (Reiniciar)"
         app:showAsAction="never" />
 </menu>
