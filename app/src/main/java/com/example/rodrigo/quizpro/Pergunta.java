@@ -1,12 +1,15 @@
 package com.example.rodrigo.quizpro;
 
-public class Produto {
+public class Pergunta {
 
-    private String questao;
+    private int id;
+    private String pergunta;
     private String altA, altB, altC, altD, altCorreta;
+    private boolean respondido;
 
-    public Produto(String questao, String altA, String altB, String altC, String altD, String altCorreta) {
-        this.questao = questao;
+    public Pergunta(int id, String questao, String altA, String altB, String altC, String altD, String altCorreta) {
+        this.id = id;
+        this.pergunta = questao;
         this.altA = altA;
         this.altB = altB;
         this.altC = altC;
@@ -14,13 +17,25 @@ public class Produto {
         this.altCorreta = altCorreta;
     }
 
-    public String getQuestao() {
+    public Pergunta(){
 
-        return questao;
     }
 
-    public void setQuestao(String questao) {
-        this.questao = questao;
+    public String getPergunta() {
+
+        return pergunta;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPergunta(String pergunta) {
+        this.pergunta = pergunta;
     }
 
     public String getAltA() {
@@ -61,5 +76,17 @@ public class Produto {
 
     public void setAltCorreta(String altCorreta) {
         this.altCorreta = altCorreta;
+    }
+
+    public boolean isRespondido() {
+        return respondido;
+    }
+    public void setRespondido(boolean respondido) {
+        this.respondido = respondido;
+    }
+
+    @Override
+    public String toString() {
+        return pergunta + "\n"+ (respondido ? "Já foi respondido.": "Não respondida");
     }
 }
