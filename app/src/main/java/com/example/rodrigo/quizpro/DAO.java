@@ -77,4 +77,12 @@ public class DAO {
 
         db.close();
     }
+
+    public void excluir(){
+        db = openHelper.getWritableDatabase();
+
+        db.execSQL("DELETE FROM perguntas");
+
+        db.close();
+    }
 }

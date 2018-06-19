@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -28,13 +31,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_code_holo_dark);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Click sobre a navegacao", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         perguntas = new ArrayList<>();
 
         DAO repository = new DAO(this);
         perguntas = repository.GetPerguntas();
-
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, perguntas);
-
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
@@ -54,6 +66,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void refreshLista(){
+        DAO repository = new DAO(this);
+        perguntas = repository.GetPerguntas();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, perguntas);
+        ListView listView = (ListView)findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        DAO repository = new DAO(this);
+        switch (item.getItemId()) {
+            case R.id.excluir:
+                repository.excluir();
+                refreshLista();
+                atualizaPlacar(0,0);
+                Toast.makeText(MainActivity.this, "Perguntas Exluidas, placar zerado ", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        return true;
     }
 
     public void toasty(){
@@ -133,13 +176,5 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
 
-    }
-
-    public void excluir(View view){
-        context = openHelper.getWritableDatabase();
-
-        context.execSQL("DELETE FROM " + "perguntas");
-
-        context.close();
     }
 }
