@@ -2,13 +2,11 @@ package com.example.rodrigo.quizpro;
 
 public class Pergunta {
 
-    private int id;
     private String pergunta;
     private String altA, altB, altC, altD, altCorreta;
     private boolean respondido;
 
-    public Pergunta(int id, String questao, String altA, String altB, String altC, String altD, String altCorreta) {
-        this.id = id;
+    public Pergunta(String questao, String altA, String altB, String altC, String altD, String altCorreta) {
         this.pergunta = questao;
         this.altA = altA;
         this.altB = altB;
@@ -24,14 +22,6 @@ public class Pergunta {
     public String getPergunta() {
 
         return pergunta;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setPergunta(String pergunta) {

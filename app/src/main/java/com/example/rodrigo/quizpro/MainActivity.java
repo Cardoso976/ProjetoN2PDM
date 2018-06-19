@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
                 Pergunta perguntaClick = perguntas.get(posicao);
                 if (!perguntaClick.isRespondido()){
-                    repository.getPergunta(posicao);
+                    chamarViewPergunta(posicao);
                     perguntaClick.setRespondido(true);
                     adapter.notifyDataSetChanged();
                 } else {
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this,"Pergunta já foi respondida",Toast.LENGTH_LONG).show();
     }
 
-    public void getPergunta(int position){
+    public void chamarViewPergunta(int position){
         Intent intent = new Intent(this,PerguntaActivity.class);
 
         Pergunta pergunta = new Pergunta();
@@ -74,7 +75,65 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("altCorreta", pergunta.getAltCorreta());
 
         startActivityForResult(intent,0);
-        //view.setEnabled(false);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            if (requestCode == 0) {
+                boolean repostaCorreta = data.getBooleanExtra("repostaCorreta", false);
+
+                if (repostaCorreta) {
+                    acertos++;
+                } else {
+                    erros++;
+                }
+                atualizaPlacar(erros,acertos);
+
+            }
+        }
+        if (requestCode == 1) {
+            DAO repository = new DAO(this);
+            perguntas = repository.GetPerguntas();
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, perguntas);
+            ListView listView = (ListView) findViewById(R.id.listView);
+            listView.setAdapter(adapter);
+            acertos = 0;
+            erros = 0;
+            atualizaPlacar(0,0);
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
+    private void atualizaPlacar(int erros, int acertos){
+        TextView txtAcertos = (TextView) findViewById(R.id.txtAcertos);
+        TextView txtErros = (TextView) findViewById(R.id.txtErros);
+
+        txtAcertos.setText("Acertos: " + acertos);
+        txtErros.setText("Erros: " + erros);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
+            toasty = Toast.makeText(this, "Pressione voltar novamente para sair.", Toast.LENGTH_LONG);
+            toasty.show();
+            this.lastBackPressTime = System.currentTimeMillis();
+        } else {
+            if (toasty != null) {
+                toasty.cancel();
+            }
+            super.onBackPressed();
+        }
+
+    }
+
+    public void excluir(View view){
+        context = openHelper.getWritableDatabase();
+
+        context.execSQL("DELETE FROM " + "perguntas");
+
+        context.close();
     }
 }

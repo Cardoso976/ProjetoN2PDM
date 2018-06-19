@@ -23,14 +23,13 @@ public class DAO {
         Cursor consulta = db.query("perguntas",null,null,null,null,null,"pergunta");
         while(consulta.moveToNext()){
             Pergunta pergunta = new Pergunta();
-            pergunta.setId(consulta.getInt(1));
-            pergunta.setPergunta(consulta.getString(2));
-            pergunta.setAltA(consulta.getString(3));
-            pergunta.setAltB(consulta.getString(4));
-            pergunta.setAltC(consulta.getString(5));
-            pergunta.setAltD(consulta.getString(6));
-            pergunta.setAltCorreta(consulta.getString(7));
-            respondido = consulta.getInt(8);
+            pergunta.setPergunta(consulta.getString(1));
+            pergunta.setAltA(consulta.getString(2));
+            pergunta.setAltB(consulta.getString(3));
+            pergunta.setAltC(consulta.getString(4));
+            pergunta.setAltD(consulta.getString(5));
+            pergunta.setAltCorreta(consulta.getString(6));
+            respondido = consulta.getInt(7);
             if (respondido == 1) pergunta.setRespondido(true);
             else pergunta.setRespondido(false);
 
@@ -51,14 +50,13 @@ public class DAO {
         consulta.moveToPosition(idPergunta);
 
         Pergunta pergunta = new Pergunta();
-        pergunta.setId(consulta.getInt(1));
-        pergunta.setPergunta(consulta.getString(2));
-        pergunta.setAltA(consulta.getString(3));
-        pergunta.setAltB(consulta.getString(4));
-        pergunta.setAltC(consulta.getString(5));
-        pergunta.setAltD(consulta.getString(6));
-        pergunta.setAltCorreta(consulta.getString(7));
-        respondido = consulta.getInt(8);
+        pergunta.setPergunta(consulta.getString(1));
+        pergunta.setAltA(consulta.getString(2));
+        pergunta.setAltB(consulta.getString(3));
+        pergunta.setAltC(consulta.getString(4));
+        pergunta.setAltD(consulta.getString(5));
+        pergunta.setAltCorreta(consulta.getString(6));
+        respondido = consulta.getInt(7);
         if (respondido == 1) pergunta.setRespondido(true);
         else pergunta.setRespondido(false);
 
