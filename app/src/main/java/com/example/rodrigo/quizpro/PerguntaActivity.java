@@ -36,16 +36,16 @@ public class PerguntaActivity extends AppCompatActivity {
         int idRespostaCorreta = 0;
         boolean acertou = false;
 
-        String A = intent.getStringExtra("altA");
-        String B = intent.getStringExtra("altB");
-        String C = intent.getStringExtra("altC");
-        String D = intent.getStringExtra("altD");
-        String Correta = intent.getStringExtra("altCorreta");
+        String a = intent.getStringExtra("altA");
+        String b = intent.getStringExtra("altB");
+        String c = intent.getStringExtra("altC");
+        String d = intent.getStringExtra("altD");
+        String ok = intent.getStringExtra("altCorreta");
 
-        if (Correta.equalsIgnoreCase(A)){idRespostaCorreta = R.id.altA;}
-        else if (Correta.equalsIgnoreCase(B)){idRespostaCorreta = R.id.altB;}
-        else if (Correta.equalsIgnoreCase(C)){idRespostaCorreta = R.id.altC;}
-        else if (Correta.equalsIgnoreCase(D)){idRespostaCorreta = R.id.altD;}
+        if (ok.equalsIgnoreCase(a)){idRespostaCorreta = R.id.altA;}
+        else if (ok.equalsIgnoreCase(b)){idRespostaCorreta = R.id.altB;}
+        else if (ok.equalsIgnoreCase(c)){idRespostaCorreta = R.id.altC;}
+        else if (ok.equalsIgnoreCase(d)){idRespostaCorreta = R.id.altD;}
 
         TextView txtPergunta = (TextView) findViewById(R.id.txtPergunta);
         RadioGroup radioGroup = (RadioGroup)findViewById(R.id.radioGroup);
@@ -56,8 +56,8 @@ public class PerguntaActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Resposta errada!", Toast.LENGTH_LONG).show();
         }
-
         Intent it = new Intent();
+
         it.putExtra("acertou", acertou);
         setResult(RESULT_OK, it);
 

@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Total Perguntas Respondidas:  " + total, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.percAcertos:
-                Toast.makeText(MainActivity.this, "Total Respostas Corretas:  " + percentualAcertos(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Total Respostas Corretas:  " + acertos + "\nPercentual de Acertos " + percentualAcertos() +"%", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -94,17 +94,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private int percentualAcertos(){
+    private double percentualAcertos(){
         DAO repository = new DAO(this);
         perguntas = repository.GetPerguntas();
-        int count = 0;
+        double count = acertos + erros;
 
-        for (Pergunta p : perguntas)
-            if(p.isRespondido()) {
-                count++;
-            }
-
-        return count;
+        return (acertos/count)*100;
     }
 
     private int totalPerguntasCadastradas(){
